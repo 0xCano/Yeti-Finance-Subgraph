@@ -1,0 +1,68 @@
+specVersion: 0.0.1
+schema:
+  file: ./schema.graphql
+dataSources:
+  - kind: ethereum
+    name: TroveManager
+    network: avalanche
+    source:
+      address: "0xa1BE5F4e24D7a47c7601A89FA6504d6BaA43802E"
+      abi: TroveManager
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.5
+      language: wasm/assemblyscript
+      entities:
+        - BaseRateUpdated
+        - InterestApplied
+        - LTermsUpdated
+        - LTermsUpdated1
+        - L_YUSDInterestUpdated
+        - LastFeeOpTimeUpdated
+        - Liquidation
+        - Redemption
+        - SystemSnapshotsUpdated
+        - SystemSnapshotsUpdated1
+        - TotalStakesUpdated
+        - TroveIndexUpdated
+        - TroveLiquidated
+        - TroveSnapshotsUpdated
+        - TroveSnapshotsUpdated1
+        - TroveUpdated
+      abis:
+        - name: TroveManager
+          file: ./abis/TroveManager.json
+      eventHandlers:
+        - event: BaseRateUpdated(uint256)
+          handler: handleBaseRateUpdated
+        - event: InterestApplied(address,uint256)
+          handler: handleInterestApplied
+        - event: LTermsUpdated(address,uint256,uint256)
+          handler: handleLTermsUpdated
+        - event: LTermsUpdated(uint256,uint256)
+          handler: handleLTermsUpdated1
+        - event: L_YUSDInterestUpdated(address,uint256)
+          handler: handleL_YUSDInterestUpdated
+        - event: LastFeeOpTimeUpdated(uint256)
+          handler: handleLastFeeOpTimeUpdated
+        - event: Liquidation(uint256,uint256,address[],uint256[],address[],uint256[])
+          handler: handleLiquidation
+        - event: Redemption(uint256,uint256,uint256,address[],uint256[])
+          handler: handleRedemption
+        - event: SystemSnapshotsUpdated(uint256)
+          handler: handleSystemSnapshotsUpdated
+        - event: SystemSnapshotsUpdated(uint256,uint256)
+          handler: handleSystemSnapshotsUpdated1
+        - event: TotalStakesUpdated(address,uint256)
+          handler: handleTotalStakesUpdated
+        - event: TroveIndexUpdated(address,uint256)
+          handler: handleTroveIndexUpdated
+        - event: TroveLiquidated(indexed address,uint256,uint256,uint8)
+          handler: handleTroveLiquidated
+        - event: TroveSnapshotsUpdated(uint256)
+          handler: handleTroveSnapshotsUpdated
+        - event: TroveSnapshotsUpdated(uint256,uint256)
+          handler: handleTroveSnapshotsUpdated1
+        - event: TroveUpdated(indexed address,uint256,address[],uint256[],uint8)
+          handler: handleTroveUpdated
+      file: ./src/mapping.ts
